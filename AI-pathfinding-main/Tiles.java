@@ -54,26 +54,4 @@ public class Tiles {
     public void setWall() {
         this.state = 9; // 9 represents a wall state
     }
-
-    public void detecting_adjacenttile(Tiles targetTile, ArrayList<Tiles> tile_path, Tiles[][] tileset) {
-        ArrayList<Tiles> adjacentTiles = new ArrayList<>();
-        if (this.x > 0) adjacentTiles.add(tileset[this.y][this.x - 1]); // Left tile
-        if (this.x < tileset[0].length - 1) adjacentTiles.add(tileset[this.y][this.x + 1]); // Right tile
-        if (this.y > 0) adjacentTiles.add(tileset[this.y - 1][this.x]); // Up tile
-        if (this.y < tileset.length - 1) adjacentTiles.add(tileset[this.y + 1][this.x]); // Down tile
-
-        Tiles nextTile = null;
-        for (Tiles adjTile : adjacentTiles) {
-            if (adjTile != null && adjTile.returnstate() != 3 && adjTile.returnstate() != 9 && !tile_path.contains(adjTile)) {
-                if (nextTile == null || Tiles.distance(targetTile, adjTile) < Tiles.distance(targetTile, nextTile)) {
-                    nextTile = adjTile;
-                }
-            }
-        }
-
-        if (nextTile != null) {
-            tile_path.add(nextTile);
-            nextTile.setstate(3);  // Mark as part of the path
-        }
-    }
 }
